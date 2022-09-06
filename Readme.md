@@ -1,8 +1,8 @@
 # Demo Spring boot
 This is a demo for using Spring boot. Along with other backend technique that can be use directly in production environment. 
 
-- **[Doing]** Learn how to use Spring boot to build RESTful API by following a tutorial on Youtube. Link at: https://www.youtube.com/watch?v=5VUjP1wMqoE. Overview of content:
-    - Follow 3-Tier architecture: **Repository** layer will talk to database, **service** layer will implement business logic and call Repository. **Resource** layer will handle incoming request 
+- **[Done]** Learn how to use Spring boot to build RESTful API by following a tutorial on Youtube. Link at: https://www.youtube.com/watch?v=5VUjP1wMqoE. Overview of content:
+    - Follow MVC architecture: **Repository** (Model) layer will talk to database, **Service** layer will implement business logic and call Repository. **Resource** (Controller) layer will handle incoming request 
     - Technology: Spring Boot, JDBC, Token
     - /api/users:
       - [POST] /login: login by username + password. Return JWT token
@@ -16,15 +16,26 @@ This is a demo for using Spring boot. Along with other backend technique that ca
 
   - **Issue** :
       - What is @transactional annotation? when and how to use it.
-  
-- Demo v2
+      - Use jdbcTempalte to connect database. Don't fully understand about it.
+    
+- **[Doing]** Demo v2
     - Using Hibernate instead of raw JDBC. Rearch about database connection pooling
     - Pagination. Avoid load too much data from database. 
     - Input validation.
     - Adding Logger. Use Log4j.
+    - Envelope the response. Json response has format like: 
+```json
+{
+  "status": "ok",
+  "data": [],
+  "error": []
+}
+```
+     
+     
 
 - Demo v3: 
-    - Permission for API: create two role: admin + normal role. Flexible per api  
+    - Permission for API: create two role: admin + normal role. Flexible permission per api and per path  
     - Http compression: reduce the amount of data is sent over the network. Use gzip
     - Security: injection, XSS. Using library of owasp
     - Encode id, don't use database's id explicitly. Ex: don't use categoryId, use encode(categoryId)
@@ -32,7 +43,6 @@ This is a demo for using Spring boot. Along with other backend technique that ca
 - Demo v4
   - Adding LRU cache, use MemCached (how to monitor)
   - Using RabitMQ for pub/sub event. Use it to clear local cache when deploy >= 2 server. Demo how to use RabitMQ
-
 
 - Deployment
     - Environment variable to seperate dev/deploy mode
