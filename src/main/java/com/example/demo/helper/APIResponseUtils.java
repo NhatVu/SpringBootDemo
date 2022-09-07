@@ -23,6 +23,6 @@ public class APIResponseUtils {
     }
 
     public static <T> Map<String, Object> buildAPIError(int status, T error){
-        return buildApiResponse(status, null, error);
+        return buildApiResponse(-Math.abs(status), null, error);
     }
 }
