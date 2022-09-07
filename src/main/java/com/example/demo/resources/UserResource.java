@@ -1,6 +1,7 @@
 package com.example.demo.resources;
 
 import com.example.demo.domain.User;
+import com.example.demo.helper.APIResponseUtils;
 import com.example.demo.services.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -24,23 +25,25 @@ public class UserResource {
     UserService userService;
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> loginUser(@RequestBody Map<String, Object> userMap) {
+    public ResponseEntity<Map<String, Object>> loginUser(@RequestBody Map<String, Object> userMap) {
         String email = (String) userMap.get("email");
         String password = (String) userMap.get("password");
         User user = userService.validateUser(email, password);
-
-        return new ResponseEntity<>(generateJWTToken(user), HttpStatus.OK);
+        Map<String, String> token = generateJWTToken(user);
+        Map<String, Object> res = APIResponseUtils.buildAPISuccess(HttpStatus.OK.value(), token);
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Map<String, String>> registerUser(@RequestBody Map<String, Object> userMap){
+    public ResponseEntity<Map<String, Object>> registerUser(@RequestBody Map<String, Object> userMap){
         String firstName = (String) userMap.get("firstName");
         String lastName = (String) userMap.get("lastName");
         String email = (String) userMap.get("email");
         String password = (String) userMap.get("password");
         User user = userService.registerUser(firstName, lastName, email, password);
-
-        return new ResponseEntity<>(generateJWTToken(user), HttpStatus.OK);
+        Map<String, String> token = generateJWTToken(user);
+        Map<String, Object> res = APIResponseUtils.buildAPISuccess(HttpStatus.OK.value(), token);
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
     private Map<String, String> generateJWTToken(User user) {

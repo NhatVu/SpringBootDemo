@@ -1,6 +1,7 @@
 package com.example.demo.resources;
 
 import com.example.demo.domain.Category;
+import com.example.demo.helper.APIResponseUtils;
 import com.example.demo.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,38 +20,40 @@ public class CategoryResource {
     CategoryService categoryService;
 
     @GetMapping("")
-    public ResponseEntity<List<Category>> getAllCategories(HttpServletRequest request){
+    public ResponseEntity<Map<String, Object>> getAllCategories(HttpServletRequest request){
         int userId = (Integer) request.getAttribute("userId");
         List<Category> categories = categoryService.fetchAllCategories(userId);
-        return new ResponseEntity<>(categories, HttpStatus.OK);
+        Map<String, Object> res = APIResponseUtils.buildAPISuccess(HttpStatus.OK.value(), categories);
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
     @GetMapping("/{categoryId}")
-    public ResponseEntity<Category> getCategoryById(HttpServletRequest request,
+    public ResponseEntity<Map<String, Object>> getCategoryById(HttpServletRequest request,
                                                     @PathVariable("categoryId") Integer categoryId) {
         int userId = (Integer) request.getAttribute("userId");
         Category category = categoryService.fetchCategoryById(userId, categoryId);
-        return new ResponseEntity<>(category, HttpStatus.OK);
+        Map<String, Object> res = APIResponseUtils.buildAPISuccess(HttpStatus.OK.value(), category);
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
     @PostMapping("")
-    public ResponseEntity<Category> addCategory(HttpServletRequest request,
+    public ResponseEntity<Map<String, Object>> addCategory(HttpServletRequest request,
                                                 @RequestBody Map<String, Object> categoryMap) {
         int userId = (Integer) request.getAttribute("userId");
         String title = (String) categoryMap.get("title");
         String description = (String) categoryMap.get("description");
         Category category = categoryService.addCategory(userId, title, description);
-        return new ResponseEntity<>(category, HttpStatus.CREATED);
+        Map<String, Object> res = APIResponseUtils.buildAPISuccess(HttpStatus.OK.value(), category);
+        return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
     @PutMapping("/{categoryId}")
-    public ResponseEntity<Map<String, Boolean>> updateCategory(HttpServletRequest request,
+    public ResponseEntity<Map<String, Object>> updateCategory(HttpServletRequest request,
                                                                @PathVariable("categoryId") Integer categoryId,
                                                                @RequestBody Category category) {
         int userId = (Integer) request.getAttribute("userId");
         categoryService.updateCategory(userId, categoryId, category);
-        Map<String, Boolean> map = new HashMap<>();
-        map.put("success", true);
+        Map<String, Object> map = APIResponseUtils.buildAPISuccess(HttpStatus.OK.value(), "update success");
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 }

@@ -23,7 +23,7 @@ This is a demo for using Spring boot. Along with other backend technique that ca
     - Pagination. Avoid load too much data from database. 
     - Input validation.
     - Adding Logger. Use Log4j.
-    - Envelope the response. Json response has format like: 
+    - **[Done]** Envelope the response. Json response has format like: 
 ```json
 {
   "status": "ok",
@@ -43,6 +43,7 @@ This is a demo for using Spring boot. Along with other backend technique that ca
 - Demo v4
   - Adding LRU cache, use MemCached (how to monitor)
   - Using RabitMQ for pub/sub event. Use it to clear local cache when deploy >= 2 server. Demo how to use RabitMQ
+  - For Token, save it on database to verify token again. Don't include sensitive on jwt. Only include noiseTokenId. Read at: https://auth0.com/docs/secure/tokens/token-best-practices
 
 - Deployment
     - Environment variable to seperate dev/deploy mode
