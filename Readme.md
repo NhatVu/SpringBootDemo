@@ -22,7 +22,7 @@ This is a demo for using Spring boot. Along with other backend technique that ca
     - Using Hibernate instead of raw JDBC. Rearch about database connection pooling
     - Pagination. Avoid load too much data from database. 
     - Input validation.
-    - Adding Logger. Use Log4j.
+    - **[Done]** Adding Logger. Use SLF4j. Config log per package level. 
     - **[Done]** Envelope the response. Json response has format like: 
 ```json
 {
@@ -61,7 +61,7 @@ This is a demo for using Spring boot. Along with other backend technique that ca
     - Use Redis to create RateLimit service
 
 - Advanced Logger
-    - Config rotation log. Avoid full disk problem.
+    - Config rotation log, File appender log. Avoid full disk problem.
     - Define log format to make the grepping log or debugging from log more easily
 
 - *[Option]* Elasticsearch

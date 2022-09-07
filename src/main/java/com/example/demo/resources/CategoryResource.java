@@ -3,6 +3,8 @@ package com.example.demo.resources;
 import com.example.demo.domain.Category;
 import com.example.demo.helper.APIResponseUtils;
 import com.example.demo.services.CategoryService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +18,14 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/categories")
 public class CategoryResource {
+    Logger logger = LoggerFactory.getLogger(CategoryResource.class);
     @Autowired
     CategoryService categoryService;
 
     @GetMapping("")
     public ResponseEntity<Map<String, Object>> getAllCategories(HttpServletRequest request){
+        logger.info("get all category call");
+        logger.debug("get all category call");
         int userId = (Integer) request.getAttribute("userId");
         List<Category> categories = categoryService.fetchAllCategories(userId);
         Map<String, Object> res = APIResponseUtils.buildAPISuccess(HttpStatus.OK.value(), categories);
