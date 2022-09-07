@@ -39,3 +39,12 @@ foreign key (user_id) references et_users(user_id);
 create sequence et_users_seq increment 1 start 1;
 create sequence et_categories_seq increment 1 start 1;
 create sequence et_transactions_seq increment 1 start 1000;
+
+-------
+insert into user_account (user_id, email, first_name, last_name, password) values (4, 'a@gmail.com', 'a', 'a_lastname', 'test123');
+insert into user_account (user_id, email, first_name, last_name, password) values (5, 'b@gmail.com', 'b', 'b_lastname', 'test123');
+insert into user_account (user_id, email, first_name, last_name, password) values (6, 'c@gmail.com', 'c', 'c_lastname', 'test123');
+insert into user_account (user_id, email, first_name, last_name, password) values (7, 'd@gmail.com', 'd', 'd_lastname', 'test123');
+insert into user_account (user_id, email, first_name, last_name, password) values (8, 'e@gmail.com', 'e', 'e_lastname', 'test123');
+insert into user_account (user_id, email, first_name, last_name, password) values (9, 'f@gmail.com', 'f', 'f_lastname', 'test123');
+insert into user_account (user_id, email, first_name, last_name, password) values (10, 'g@gmail.com', 'g', 'g_lastname', 'test123');

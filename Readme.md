@@ -22,8 +22,11 @@ This is a demo for using Spring boot. Along with other backend technique that ca
     - Using Hibernate instead of raw JDBC. Rearch about database connection pooling
       - [Note] JPA derived simple queries by Java Persistence Query Language (JPQL): https://www.baeldung.com/spring-data-derived-queries. For complex query that doesn't fit to exist rules, try 4.6. Custom Implementations for Spring Data Repositories at https://docs.spring.io/spring-data/jpa/docs/current/reference/html/
       - [Note] Config spring.jpa.hibernate.ddl-auto=update, spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect for auto create table in postgres. IMPORTANT: don't use postgres keyword for table name
+      - ORM relationship: OneToOne, ManyToOne and ManyToMany. 
+      - Should we use auto incremental id? 
 
-    - Pagination. Avoid load too much data from database. 
+    - [Done] Pagination when using ORM. Avoid load too much data from database.
+      - Ref: https://www.baeldung.com/spring-data-jpa-pagination-sorting
     - Input validation.
     - **[Done]** Adding Logger. Use SLF4j. Config log per package level. 
     - **[Done]** Envelope the response. Json response has format like: 

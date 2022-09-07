@@ -22,8 +22,8 @@ public class UserResource {
     @Autowired
     UserService userService;
     @GetMapping("")
-    public ResponseEntity<Map<String, Object>> getAllUser(){
-        List<User> users = userService.getAllUser();
+    public ResponseEntity<Map<String, Object>> getAllUser(@RequestParam(name = "offset") int page, @RequestParam int pageSize){
+        List<User> users = userService.getAllUser(page, pageSize);
         Map<String, Object> res = APIResponseUtils.buildAPISuccess(HttpStatus.OK.value(), users);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }

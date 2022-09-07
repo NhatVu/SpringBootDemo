@@ -6,6 +6,9 @@ import com.example.demo.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,9 +25,11 @@ public class UserServiceImpl implements UserService{
     UserRepository userRepository;
 
     @Override
-    public List<User> getAllUser(){
+    public List<User> getAllUser(int page, int pageSize){
         List<User> res = new ArrayList<>();
-        userRepository.findAll().forEach(res::add);
+        Pageable sortedByName =
+                PageRequest.of(page, pageSize, Sort.by("userId").descending()); // Sort.by("user_id").descending()
+        userRepository.findAll(sortedByName).forEach(res::add);
         return res;
     }
 
