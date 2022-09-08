@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface UserService {
     List<User> getAllUser(int page, int pageSize);
+
+    User findById(int userId);
     User validateUser(String email, String password) throws EtAuthException;
     User registerUser(String firstName, String lastName, String email, String password) throws EtAuthException;
 }

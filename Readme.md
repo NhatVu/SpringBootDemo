@@ -27,7 +27,9 @@ This is a demo for using Spring boot. Along with other backend technique that ca
 
     - [Done] Pagination when using ORM. Avoid load too much data from database.
       - Ref: https://www.baeldung.com/spring-data-jpa-pagination-sorting
-    - Input validation.
+    - [Done] Input validation.
+      - Bean Validation: https://www.baeldung.com/spring-boot-bean-validation
+      - PathVariable, RequestPram validation: https://www.baeldung.com/spring-validate-requestparam-pathvariable
     - **[Done]** Adding Logger. Use SLF4j. Config log per package level. 
     - **[Done]** Envelope the response. Json response has format like: 
 ```json
