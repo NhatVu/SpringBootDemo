@@ -18,20 +18,18 @@ This is a demo for using Spring boot. Along with other backend technique that ca
       - What is @transactional annotation? when and how to use it.
       - Use jdbcTempalte to connect database. Don't fully understand about it.
     
-- **[Doing]** Demo v2
+- **[Done]** Demo v2
     - Using Hibernate instead of raw JDBC. Rearch about database connection pooling
       - [Note] JPA derived simple queries by Java Persistence Query Language (JPQL): https://www.baeldung.com/spring-data-derived-queries. For complex query that doesn't fit to exist rules, try 4.6. Custom Implementations for Spring Data Repositories at https://docs.spring.io/spring-data/jpa/docs/current/reference/html/
       - [Note] Config spring.jpa.hibernate.ddl-auto=update, spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect for auto create table in postgres. IMPORTANT: don't use postgres keyword for table name
-      - ORM relationship: OneToOne, ManyToOne and ManyToMany. 
-      - Should we use auto incremental id? 
 
-    - [Done] Pagination when using ORM. Avoid load too much data from database.
+    - Pagination when using ORM. Avoid load too much data from database.
       - Ref: https://www.baeldung.com/spring-data-jpa-pagination-sorting
-    - [Done] Input validation.
+    - Input validation.
       - Bean Validation: https://www.baeldung.com/spring-boot-bean-validation
       - PathVariable, RequestPram validation: https://www.baeldung.com/spring-validate-requestparam-pathvariable
-    - **[Done]** Adding Logger. Use SLF4j. Config log per package level. 
-    - **[Done]** Envelope the response. Json response has format like: 
+    - Adding Logger. Use SLF4j. Config log per package level. 
+    - Envelope the response. Json response has format like: 
 ```json
 {
   "status": "ok",
@@ -42,11 +40,12 @@ This is a demo for using Spring boot. Along with other backend technique that ca
      
      
 
-- Demo v3: 
+- **[Doing]** Demo v3:
     - Permission for API: create two role: admin + normal role. Flexible permission per api and per path  
-    - Http compression: reduce the amount of data is sent over the network. Use gzip
+    - [Done] Http compression: reduce the amount of data is sent over the network. Use gzip
     - Security: injection, XSS. Using library of owasp
     - Encode id, don't use database's id explicitly. Ex: don't use categoryId, use encode(categoryId)
+    - Handle repository exception, don't log all stack to client response.
   
 - Demo v4
   - Adding LRU cache, use MemCached (how to monitor)
@@ -74,6 +73,9 @@ This is a demo for using Spring boot. Along with other backend technique that ca
 
 - *[Option]* Elasticsearch
 - *[Option]* Login with facebook, google
+- Techical debt
+  - ORM relationship: OneToOne, ManyToOne and ManyToMany. Should we use auto incremental id? I think we shouldn't use ForeignKey on production environment because of performance.
+  - Spring filter
 
 Resources:
 1. Spring Boot Quick Start: https://www.youtube.com/playlist?list=PLqq-6Pq4lTTbx8p2oCgcAQGQyqN8XeA1x
