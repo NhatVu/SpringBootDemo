@@ -44,6 +44,8 @@ This is a demo for using Spring boot. Along with other backend technique that ca
     - Permission for API: create two role: admin + normal role. Flexible permission per api and per path  
     - [Done] Http compression: reduce the amount of data is sent over the network. Use gzip
     - Security: injection, XSS. Using library of owasp
+      - Spring security tutorial: https://www.toptal.com/spring/spring-security-tutorial 
+      - https://stackoverflow.com/questions/9787409/what-is-the-default-authenticationmanager-in-spring-security-how-does-it-authen
     - Encode id, don't use database's id explicitly. Ex: don't use categoryId, use encode(categoryId)
     - Handle repository exception, don't log all stack to client response.
   

@@ -13,5 +13,6 @@ public interface UserRepository extends CrudRepository<User, Integer>, PagingAnd
     // define method following by JPQL -> JPA will generate the implementation.
     List<User> findByEmailAndPassword(String email, String password);
 
+    User findByEmail(String email);
     long countByEmail(String email);
 }
