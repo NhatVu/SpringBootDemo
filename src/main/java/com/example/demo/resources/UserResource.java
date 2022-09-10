@@ -46,36 +46,6 @@ public class UserResource {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<Map<String, Object>> loginUser(@RequestBody Map<String, Object> userMap) {
-        logger.info("call /api/users/login");
-        String email = (String) userMap.get("email");
-        String password = (String) userMap.get("password");
-        User user = userService.validateUser(email, password);
-        if (user == null){
-            Map<String, String> err = new HashMap<>();
-            err.put("content", "wrong email + password");
-            return new ResponseEntity<>(APIResponseUtils.buildAPIError(HttpStatus.NOT_FOUND.value(), err), HttpStatus.FORBIDDEN);
-        }
-        Map<String, String> token = Utils.generateJWTToken(user);
-        Map<String, Object> res = APIResponseUtils.buildAPISuccess(HttpStatus.OK.value(), token);
-        return new ResponseEntity<>(res, HttpStatus.OK);
-    }
-
-    @PostMapping("/register")
-    public ResponseEntity<Map<String, Object>> registerUser(@RequestBody Map<String, Object> userMap){
-        String firstName = (String) userMap.get("firstName");
-        String lastName = (String) userMap.get("lastName");
-        String email = (String) userMap.get("email");
-        String password = (String) userMap.get("password");
-        User user = userService.registerUser(firstName, lastName, email, password);
-        Map<String, String> token = Utils.generateJWTToken(user);
-        Map<String, Object> res = APIResponseUtils.buildAPISuccess(HttpStatus.OK.value(), token);
-        return new ResponseEntity<>(res, HttpStatus.OK);
-    }
-
-
-
     @PostMapping("/addrole")
     public ResponseEntity<Map<String, Object>> addRoleToUser(@RequestBody RoleToUserForm form){
         userService.addRoleToUser(form.getEmail(), form.getRoleName());

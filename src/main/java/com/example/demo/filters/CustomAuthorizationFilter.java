@@ -52,6 +52,7 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
 
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email, null, authorities);
 
+            // important. This call will set userProfile, so that Spring can handle Authority
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             filterChain.doFilter(request, response);
 
