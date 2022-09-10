@@ -72,6 +72,7 @@ This is a demo for using Spring boot. Along with other backend technique that ca
 - Advanced Logger
     - Config rotation log, File appender log. Avoid full disk problem.
     - Define log format to make the grepping log or debugging from log more easily
+    - Config log for showing line number
 
 - *[Option]* Elasticsearch
 - *[Option]* Login with facebook, google

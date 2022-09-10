@@ -54,10 +54,8 @@ public class DemoApplication {
     @Bean
     CommandLineRunner run(UserService userService) {
         return args -> {
-            userService.saveRole(new Role(null, "ROLE_USER"));
-            userService.saveRole(new Role(null, "ROLE_MANAGER"));
-            userService.saveRole(new Role(null, "ROLE_ADMIN"));
-            userService.saveRole(new Role(null, "ROLE_SUPPER_ADMIN"));
+            userService.saveRole(new Role(null, Constants.ROLE_ADMIN));
+            userService.saveRole(new Role(null, Constants.ROLE_USER));
 
             userService.saveUser(new User(null, "a_firstname", "a_lastname", "a@gmail.com", "pass123", new ArrayList<>() ));
             userService.saveUser(new User(null, "b_firstname", "b_lastname", "b@gmail.com", "pass123", new ArrayList<>() ));
@@ -68,10 +66,22 @@ public class DemoApplication {
             userService.saveUser(new User(null, "g_firstname", "g_lastname", "g@gmail.com", "pass123", new ArrayList<>() ));
             userService.saveUser(new User(null, "nhat", "vu", "nhat@gmail.com", "pass123", new ArrayList<>() ));
             userService.saveUser(new User(null, "john", "vu", "john@gmail.com", "pass123", new ArrayList<>() ));
+            userService.saveUser(new User(null, "user", "vu", "user@gmail.com", "pass123", new ArrayList<>() ));
+            userService.saveUser(new User(null, "admin", "vu", "admin@gmail.com", "pass123", new ArrayList<>() ));
+            userService.saveUser(new User(null, "normal", "vu", "normal@gmail.com", "pass123", new ArrayList<>() ));
+            userService.saveUser(new User(null, "onlyadmin", "vu", "onlyadmin@gmail.com", "pass123", new ArrayList<>() ));
 
-            userService.addRoleToUser("john@gmail.com", "ROLE_USER");
-            userService.addRoleToUser("nhat@gmail.com", "ROLE_ADMIN");
-            userService.addRoleToUser("nhat@gmail.com", "ROLE_USER");
+
+            userService.addRoleToUser("john@gmail.com", Constants.ROLE_USER);
+            userService.addRoleToUser("nhat@gmail.com", Constants.ROLE_ADMIN);
+            userService.addRoleToUser("nhat@gmail.com", Constants.ROLE_USER);
+
+            userService.addRoleToUser("user@gmail.com", Constants.ROLE_USER);
+
+            userService.addRoleToUser("admin@gmail.com", Constants.ROLE_ADMIN);
+            userService.addRoleToUser("admin@gmail.com", Constants.ROLE_USER);
+
+            userService.addRoleToUser("onlyadmin@gmail.com", Constants.ROLE_ADMIN);
         };
     }
 

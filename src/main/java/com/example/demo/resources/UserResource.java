@@ -16,6 +16,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.Constants;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import java.util.Date;
@@ -26,6 +27,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/users")
 @Validated
+@RolesAllowed({Constants.ROLE_USER, Constants.ROLE_ADMIN})
 public class UserResource {
     Logger logger = LoggerFactory.getLogger(UserResource.class);
     @Autowired
