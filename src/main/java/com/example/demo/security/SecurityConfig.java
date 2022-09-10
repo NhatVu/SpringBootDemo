@@ -50,6 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // order is matter
         // public api
         http.authorizeHttpRequests().antMatchers("/api/login").permitAll();
+        http.authorizeHttpRequests().antMatchers("/api/public").permitAll();
 
         // private api. Use annotation for Authorization.
         http.authorizeHttpRequests().anyRequest().authenticated();

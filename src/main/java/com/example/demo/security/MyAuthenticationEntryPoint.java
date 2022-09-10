@@ -36,7 +36,7 @@ public class MyAuthenticationEntryPoint implements AuthenticationEntryPoint {
                          AccessDeniedException accessDeniedException) throws IOException {
         // 403
         Map<String, String> res = new HashMap<>();
-        res.put("error", "Authorization Failed");
+        res.put("error", "Authorization Failed. " + accessDeniedException.getMessage());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setStatus(HttpStatus.FORBIDDEN.value());
         new ObjectMapper().writeValue(response.getOutputStream(), res);
