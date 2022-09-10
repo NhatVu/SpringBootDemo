@@ -8,6 +8,7 @@ import com.example.demo.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -38,7 +39,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     PasswordEncoder passwordEncoder;
 
     @Override
-    public List<User> getAllUser(int page, int pageSize){
+    public List<User> getAllUser(int page, int pageSize) {
         List<User> res = new ArrayList<>();
         Pageable sortedByName =
                 PageRequest.of(page, pageSize, Sort.by("userId").descending()); // Sort.by("user_id").descending()
@@ -47,34 +48,41 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User findById(int userId){
+    public User findById(int userId) {
         User res = userRepository.findById(userId).orElse(null);
         return res;
     }
 
     @Override
     public User validateUser(String email, String password) throws EtAuthException {
-        if (email != null )
-            email = email.toLowerCase();
-        User user = userRepository.findByEmail(email);
-        if (user == null){
-            return null;
+        logger.info("call validateUser");
+        try {
+            if (email != null)
+                email = email.toLowerCase();
+            User user = userRepository.findByEmail(email);
+            if (user == null) {
+                return null;
+            }
+            if (!passwordEncoder.matches(password, user.getPassword())) {
+                return null;
+            }
+
+            return user;
+        } catch (DataAccessException dae) {
+            logger.error("DataAccessException: " + dae.getMessage());
+            throw new EtAuthException("Access db fail. " + dae.getMessage());
         }
-        if (!passwordEncoder.matches(password, user.getPassword())){
-            return null;
-        };
-        return user;
     }
 
     @Override
     public User registerUser(String firstName, String lastName, String email, String password) throws EtAuthException {
         Pattern pattern = Pattern.compile("^(.+)@(.+)$");
-        if(email != null) email = email.toLowerCase();
-        if(!pattern.matcher(email).matches())
+        if (email != null) email = email.toLowerCase();
+        if (!pattern.matcher(email).matches())
             throw new EtAuthException("Invalid email format");
         long count = userRepository.countByEmail(email);
-        logger.info("countByEmail: "+ count);
-        if(count > 0)
+        logger.info("countByEmail: " + count);
+        if (count > 0)
             throw new EtAuthException("Email already in use");
         // fix primary key for User. Have use external service to generate id
         User user = new User(firstName, lastName, email, password);
@@ -112,10 +120,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // the function belongs to Interface, can't change. Treat username as email
         User user = userRepository.findByEmail(username);
-        if (user == null){
+        if (user == null) {
             logger.error("User not found in the database");
             throw new UsernameNotFoundException(("User not found in database"));
-        }else{
+        } else {
             logger.info("User found. email {}, password: {}", username, user.getPassword());
         }
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();

@@ -41,15 +41,19 @@ This is a demo for using Spring boot. Along with other backend technique that ca
      
 
 - **[Doing]** Demo v3:
-    - Permission for API: create two role: admin + normal role. Flexible permission per api and per path  
+    - [Done] Permission for API: create two role: admin + normal role. Flexible permission per api and per path  
     - [Done] Http compression: reduce the amount of data is sent over the network. Use gzip
     - Security: injection, XSS. Using library of owasp
       - Spring security tutorial: https://www.toptal.com/spring/spring-security-tutorial 
       - https://stackoverflow.com/questions/9787409/what-is-the-default-authenticationmanager-in-spring-security-how-does-it-authen
-    - Encode id, don't use database's id explicitly. Ex: don't use categoryId, use encode(categoryId)
-    - Handle repository exception, don't log all stack to client response.
-  
+      - Create XSSFilter. How to list all default filter 
+    - [Done] Handle repository exception, don't log all stack to client response.
+      - DBConnection exception has to catch CannotCreateTransactionException at Controller level or use @ControllerAcvice
+
 - Demo v4
+  - Add testing 
+  
+- Demo v5
   - Adding LRU cache, use MemCached (how to monitor)
   - Using RabitMQ for pub/sub event. Use it to clear local cache when deploy >= 2 server. Demo how to use RabitMQ
   - For Token, save it on database to verify token again. Don't include sensitive on jwt. Only include noiseTokenId. Read at: https://auth0.com/docs/secure/tokens/token-best-practices
@@ -69,16 +73,18 @@ This is a demo for using Spring boot. Along with other backend technique that ca
     - Set RateLimit for API.
     - Use Redis to create RateLimit service
 
-- Advanced Logger
+- Advanced Logger + other task
     - Config rotation log, File appender log. Avoid full disk problem.
     - Define log format to make the grepping log or debugging from log more easily
-    - Config log for showing line number
+    - Config log for showing line number 
+    - Encode id, don't use database's id explicitly. Ex: don't use categoryId, use encode(categoryId)
 
-- *[Option]* Elasticsearch
+- *[Option]* Elasticsearch. Center log for aggregation and build QoS (Quality of Serivce)
 - *[Option]* Login with facebook, google
 - Techical debt
   - ORM relationship: OneToOne, ManyToOne and ManyToMany. Should we use auto incremental id? I think we shouldn't use ForeignKey on production environment because of performance.
   - Spring filter
+  - Set timeout for connecting to database. Tend to use circuit breaker pattern
 
 Resources:
 1. Spring Boot Quick Start: https://www.youtube.com/playlist?list=PLqq-6Pq4lTTbx8p2oCgcAQGQyqN8XeA1x
