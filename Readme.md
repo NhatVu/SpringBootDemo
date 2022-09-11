@@ -40,29 +40,33 @@ This is a demo for using Spring boot. Along with other backend technique that ca
      
      
 
-- **[Doing]** Demo v3:
-    - [Done] Permission for API: create two role: admin + normal role. Flexible permission per api and per path  
-    - [Done] Http compression: reduce the amount of data is sent over the network. Use gzip
-    - Security: injection, XSS. Using library of owasp
-      - Spring security tutorial: https://www.toptal.com/spring/spring-security-tutorial 
-      - https://stackoverflow.com/questions/9787409/what-is-the-default-authenticationmanager-in-spring-security-how-does-it-authen
-      - Create XSSFilter. How to list all default filter 
-    - [Done] Handle repository exception, don't log all stack to client response.
+- **[Done]** Demo v3:
+    - Permission for API: create two role: admin + normal role. Flexible permission per api and per path  
+    - Http compression: reduce the amount of data is sent over the network. Use gzip
+    - Handle repository exception, don't log all stack to client response.
       - DBConnection exception has to catch CannotCreateTransactionException at Controller level or use @ControllerAcvice
+    - References: 
+        - Spring security tutorial: https://www.toptal.com/spring/spring-security-tutorial
+        - https://stackoverflow.com/questions/9787409/what-is-the-default-authenticationmanager-in-spring-security-how-does-it-authen
 
-- Demo v4
-  - Add testing 
+- [Doing] Demo v4
+  - [Done] Change log format: show line number for easy debugging
+  - Add testing
+  - Use Junit 5 and Mockito to test REST API
+
+- Deployment
+    - Environment variable to seperate dev/deploy mode
+    - Deploy GCP, config to deploy production, config SSL
+    - Create Docker image for this app. Deploy using Kubernetes
+    - Apply CI/CD
   
 - Demo v5
   - Adding LRU cache, use MemCached (how to monitor)
   - Using RabitMQ for pub/sub event. Use it to clear local cache when deploy >= 2 server. Demo how to use RabitMQ
   - For Token, save it on database to verify token again. Don't include sensitive on jwt. Only include noiseTokenId. Read at: https://auth0.com/docs/secure/tokens/token-best-practices
+  - Security: injection, XSS. Using library of owasp.       - Create Custom XSSFilter. How to list all default filter
 
-- Deployment
-    - Environment variable to seperate dev/deploy mode
-    - Deploy GCP, config to deploy production wsgi, config SSL
-    - Create Docker image for this app. Deploy using Kubernetes
-    - Apply CI/CD
+
 
 - Monitor service after deploy
     - Stress test service
@@ -85,6 +89,7 @@ This is a demo for using Spring boot. Along with other backend technique that ca
   - ORM relationship: OneToOne, ManyToOne and ManyToMany. Should we use auto incremental id? I think we shouldn't use ForeignKey on production environment because of performance.
   - Spring filter
   - Set timeout for connecting to database. Tend to use circuit breaker pattern
+  - Custom annotation? 
 
 Resources:
 1. Spring Boot Quick Start: https://www.youtube.com/playlist?list=PLqq-6Pq4lTTbx8p2oCgcAQGQyqN8XeA1x
