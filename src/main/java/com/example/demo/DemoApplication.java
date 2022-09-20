@@ -4,6 +4,7 @@ import com.example.demo.domain.Role;
 import com.example.demo.domain.User;
 import com.example.demo.filters.AuthFilter;
 import com.example.demo.services.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,6 +19,7 @@ import org.springframework.web.filter.CorsFilter;
 import java.util.ArrayList;
 
 @SpringBootApplication
+@Slf4j
 public class DemoApplication {
 
     public static void main(String[] args) {
@@ -54,6 +56,7 @@ public class DemoApplication {
     @Bean
     CommandLineRunner run(UserService userService) {
         return args -> {
+            log.info("Run CommandLineRunner");
             userService.saveRole(new Role(null, Constants.ROLE_ADMIN));
             userService.saveRole(new Role(null, Constants.ROLE_USER));
 

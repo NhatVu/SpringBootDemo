@@ -51,8 +51,10 @@ This is a demo for using Spring boot. Along with other backend technique that ca
 
 - [Doing] Demo v4
   - [Done] Change log format: show line number for easy debugging
-  - Add testing
+  - [Doing] Custom application.properties, spring boot profiles (dev/production). Config Bean only run at dev/test profile.
+  - [Done] Add TestContainers. Using docker to start real database for testing, not using H2/in-memory db.
   - Use Junit 5 and Mockito to test REST API
+  - NonUniqueResultException if duplicate email. How to solve: unique email or change return result 
 
 - Deployment
     - Environment variable to seperate dev/deploy mode
