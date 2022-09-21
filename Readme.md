@@ -55,6 +55,12 @@ This is a demo for using Spring boot. Along with other backend technique that ca
   - [Done] Add TestContainers. Using docker to start real database for testing, not using H2/in-memory db.
   - Use Junit 5 and Mockito to test REST API
   - NonUniqueResultException if duplicate email. How to solve: unique email or change return result 
+    - F.I.R.S.T principles for testing: 
+    - F - Fast
+    - I - Independent
+    - R - Repeatable
+    - S - Self-Validating
+    - T - Timely
 
 - Deployment
     - Environment variable to seperate dev/deploy mode

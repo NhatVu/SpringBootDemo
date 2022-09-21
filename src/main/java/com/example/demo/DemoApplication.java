@@ -10,6 +10,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
@@ -54,12 +55,14 @@ public class DemoApplication {
         return new BCryptPasswordEncoder();
     }
     @Bean
+    @Profile({"dev", "test"})
     CommandLineRunner run(UserService userService) {
         return args -> {
             log.info("Run CommandLineRunner");
             userService.saveRole(new Role(null, Constants.ROLE_ADMIN));
             userService.saveRole(new Role(null, Constants.ROLE_USER));
 
+            // 13 user
             userService.saveUser(new User(null, "a_firstname", "a_lastname", "a@gmail.com", "pass123", new ArrayList<>() ));
             userService.saveUser(new User(null, "b_firstname", "b_lastname", "b@gmail.com", "pass123", new ArrayList<>() ));
             userService.saveUser(new User(null, "c_firstname", "c_lastname", "c@gmail.com", "pass123", new ArrayList<>() ));
