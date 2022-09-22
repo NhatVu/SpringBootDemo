@@ -45,7 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         // Set unauthorized requests exception handler
-        http.exceptionHandling().authenticationEntryPoint(new MyAuthenticationEntryPoint());
+        http.exceptionHandling()
+                .authenticationEntryPoint(new MyAuthenticationEntryPoint());
 
         // order is matter
         // public api

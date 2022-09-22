@@ -22,6 +22,11 @@ public class JsonHelper {
         return objectMapper.readTree(src);
     }
 
+    public static <T> T parse(String src, Class<T> clazz) throws JsonProcessingException {
+        JsonNode node = objectMapper.readTree(src);
+        return fromJsonNode(node, clazz);
+    }
+
     public static <T> T fromJsonNode(JsonNode node, Class<T> clazz) throws JsonProcessingException {
         return objectMapper.treeToValue(node, clazz);
     }

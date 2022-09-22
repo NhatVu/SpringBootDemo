@@ -65,6 +65,7 @@ public class PublicAPIResource {
     }
 
     @PostMapping("/register")
+    // check duplicate email
     public ResponseEntity<Map<String, Object>> registerUser(@RequestBody Map<String, Object> userMap){
         String firstName = (String) userMap.get("firstName");
         String lastName = (String) userMap.get("lastName");

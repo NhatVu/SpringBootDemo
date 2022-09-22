@@ -61,6 +61,7 @@ This is a demo for using Spring boot. Along with other backend technique that ca
     - R - Repeatable
     - S - Self-Validating
     - T - Timely
+  - createUser: check duplicate email
 
 - Deployment
     - Environment variable to seperate dev/deploy mode

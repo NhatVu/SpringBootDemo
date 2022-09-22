@@ -2,7 +2,6 @@ package com.example.demo;
 
 import com.example.demo.domain.Role;
 import com.example.demo.domain.User;
-import com.example.demo.filters.AuthFilter;
 import com.example.demo.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;

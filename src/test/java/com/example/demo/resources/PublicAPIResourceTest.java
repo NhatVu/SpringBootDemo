@@ -3,6 +3,7 @@ package com.example.demo.resources;
 import com.example.demo.domain.User;
 import com.example.demo.helper.JsonHelper;
 import com.example.demo.helper.Utils;
+import com.example.demo.repositories.UserRepository;
 import com.example.demo.services.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
+import org.testcontainers.shaded.org.apache.commons.io.ByteOrderMark;
 import util.AbstractIntegrationTest;
 import util.TestHelper;
 
@@ -23,6 +25,9 @@ class PublicAPIResourceTest extends AbstractIntegrationTest {
 
     @Autowired
     protected UserService userService;
+
+    @Autowired
+    protected UserRepository userRepository;
 
     private HttpHeaders getPostHeaders() {
         HttpHeaders headers = new HttpHeaders();
@@ -87,9 +92,26 @@ class PublicAPIResourceTest extends AbstractIntegrationTest {
 
         assertThat(status).isEqualTo(-HttpStatus.NOT_FOUND.value());
         assertThat(error).isEqualTo("wrong email + password");
+
     }
 
     @Test
-    void registerUser() {
+    void registerUser() throws JsonProcessingException {
+        // given
+        String json = TestHelper.readFromResources("http/controller/public_controller_integration_test/create_user.json");
+        User clientUser = JsonHelper.parse(json, User.class);
+        // when
+        ResponseEntity<String> response = restTemplate.exchange("/api/public/register", HttpMethod.POST,
+                new HttpEntity<>(json,getPostHeaders()),
+                String.class);
+        String jsonResponse = response.getBody();
+        System.out.println("jsonReponse");
+        JsonNode jsonNode = JsonHelper.parse(jsonResponse);
+        int status = jsonNode.get("status").asInt();
+
+        assertThat(status).isEqualTo(HttpStatus.OK.value());
+        // check email exist in db
+        User byEmail = userRepository.findByEmail(clientUser.getEmail());
+        assertThat(clientUser.getEmail()).isEqualTo(byEmail.getEmail());
     }
 }

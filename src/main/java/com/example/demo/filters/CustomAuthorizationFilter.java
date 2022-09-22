@@ -29,13 +29,14 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
             return;
         }
         String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
-        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
+        if (authorizationHeader == null) {
             logger.info("run customer authorization filter. No header authorization");
             filterChain.doFilter(request, response);
             return;
         }
-
-        String token = authorizationHeader.substring("Bearer ".length());
+        // This is for demo. In production, it has to have a database that store token. We have to check
+        // token each time it sends from client.
+        String token = authorizationHeader;
         try {
             Claims claims = Jwts.parser().setSigningKey(Constants.API_SECRET_KEY)
                     .parseClaimsJws(token).getBody();

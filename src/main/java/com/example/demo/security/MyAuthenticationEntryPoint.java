@@ -1,6 +1,7 @@
 package com.example.demo.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.AccessDeniedException;
@@ -18,13 +19,14 @@ import java.util.Map;
 
 
 @ControllerAdvice
+@Slf4j
 public class MyAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
             throws IOException, ServletException {
         // 401
         Map<String, String> res = new HashMap<>();
-        res.put("error", "Unauthorized request!");
+        res.put("error", "Unauthentication request!. call from MyAuthenticationEntryPoint");
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
         new ObjectMapper().writeValue(response.getOutputStream(), res);
@@ -35,7 +37,9 @@ public class MyAuthenticationEntryPoint implements AuthenticationEntryPoint {
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AccessDeniedException accessDeniedException) throws IOException {
         // 403
+        log.info("handle AccessDeniedException from MyAuthenticationEntryPoint class");
         Map<String, String> res = new HashMap<>();
+
         res.put("error", "Authorization Failed. " + accessDeniedException.getMessage());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setStatus(HttpStatus.FORBIDDEN.value());
