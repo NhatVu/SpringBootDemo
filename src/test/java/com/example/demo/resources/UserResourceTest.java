@@ -75,7 +75,33 @@ class UserResourceTest extends AbstractIntegrationTest {
     }
 
     @Test
-    void findUserById_UserRole() {
+    void findUserById_UserRole() throws JsonProcessingException {
+        // given
+        String jsonInput = TestHelper.readFromResources("http/controller/public_controller_integration_test/login_user.json");
+        String token = getTokenFromLogin(jsonInput);
+
+        // when
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", token);
+        ResponseEntity<String> response = restTemplate.exchange("/api/users/1",
+                HttpMethod.GET,
+                new HttpEntity<>(headers),
+                String.class);
+        String jsonRes = response.getBody();
+        System.out.println("response json: " + jsonRes);
+        /*
+        {
+    "data": {
+        "userId": 3,
+        "firstName": "a_firstname",
+        "lastName": "a_lastname",
+        "email": "a@gmail.com",
+        "password": "$2a$10$MSL/eH2OCQylc3dEHrPjWuVgtndM5I2SeVclE3UvCeZCNID3eePW6",
+        "roles": []
+    },
+    "status": 200
+}
+         */
     }
 
     @Test

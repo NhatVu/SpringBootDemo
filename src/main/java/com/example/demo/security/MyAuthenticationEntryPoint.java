@@ -1,5 +1,6 @@
 package com.example.demo.security;
 
+import com.example.demo.helper.JsonHelper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -50,7 +51,12 @@ public class MyAuthenticationEntryPoint implements AuthenticationEntryPoint {
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          Exception exception) throws IOException {
         // 500
-        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error : " + exception.getMessage());
+        log.info("handle exception");
+        Map<String, String> res = new HashMap<>();
+        res.put("message", "Internal Error. Call from MyAuthenticationEntryPoint");
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        new ObjectMapper().writeValue(response.getOutputStream(), res);
     }
 
 }

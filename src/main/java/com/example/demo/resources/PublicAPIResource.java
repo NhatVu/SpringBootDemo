@@ -44,24 +44,6 @@ public class PublicAPIResource {
             Map<String, String> token = Utils.generateJWTToken(user);
             Map<String, Object> res = APIResponseUtils.buildAPISuccess(HttpStatus.OK.value(), token);
             return new ResponseEntity<>(res, HttpStatus.OK);
-//        }catch (CannotCreateTransactionException e) {
-//            logger.error("call CannotCreateTransactionException");
-//            if (e.contains(ConnectException.class)) {
-//                logger.debug("ConnectException {}", e.getMessage());
-//
-//                Map<String, Object> res = APIResponseUtils.buildAPIError(HttpStatus.SERVICE_UNAVAILABLE.value(),  "SERVICE_UNAVAILABLE. see log for more detail");
-//                return new ResponseEntity<>(res, HttpStatus.SERVICE_UNAVAILABLE);
-//            } else {
-//                Map<String, Object> res = APIResponseUtils.buildAPIError(HttpStatus.INTERNAL_SERVER_ERROR.value(),  "INTERNAL_SERVER_ERROR");
-//                return new ResponseEntity<>(res, HttpStatus.INTERNAL_SERVER_ERROR);
-//            }
-//        }catch (Exception e){
-//            logger.error("call Exception");
-//            logger.error(e.getClass().getName());
-//            logger.error(e.getMessage());
-//            Map<String, Object> res = APIResponseUtils.buildAPIError(HttpStatus.INTERNAL_SERVER_ERROR.value(),  e.getMessage());
-//            return new ResponseEntity<>(res, HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
     }
 
     @PostMapping("/register")

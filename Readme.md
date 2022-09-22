@@ -49,19 +49,18 @@ This is a demo for using Spring boot. Along with other backend technique that ca
         - Spring security tutorial: https://www.toptal.com/spring/spring-security-tutorial
         - https://stackoverflow.com/questions/9787409/what-is-the-default-authenticationmanager-in-spring-security-how-does-it-authen
 
-- [Doing] Demo v4
+- [Done] Demo v4
   - [Done] Change log format: show line number for easy debugging
-  - [Doing] Custom application.properties, spring boot profiles (dev/production). Config Bean only run at dev/test profile.
-  - [Done] Add TestContainers. Using docker to start real database for testing, not using H2/in-memory db.
-  - Use Junit 5 and Mockito to test REST API
-  - NonUniqueResultException if duplicate email. How to solve: unique email or change return result 
+  - [Done] Custom application.properties, spring boot profiles (dev/production). Config Bean only run at dev/test profile.
+  - [Done] Add TestContainers. Using docker to start real database for testing, not using H2/in-memory db. Using SingleContainer pattern to avoid start container many times. Use TestRestTemplate class to create HTTP request.
+  - [Done] Use Junit 5 and Mockito to test REST API
     - F.I.R.S.T principles for testing: 
     - F - Fast
     - I - Independent
     - R - Repeatable
     - S - Self-Validating
     - T - Timely
-  - createUser: check duplicate email
+    - Ref: https://engineering.zalando.com/posts/2021/02/integration-tests-with-testcontainers.html 
 
 - Deployment
     - Environment variable to seperate dev/deploy mode
@@ -70,12 +69,12 @@ This is a demo for using Spring boot. Along with other backend technique that ca
     - Apply CI/CD
   
 - Demo v5
+  - SpringBoot exception handler for violation constrains (input data). Custom message for each controller.  
+  - CreateUser: check duplicate email
   - Adding LRU cache, use MemCached (how to monitor)
   - Using RabitMQ for pub/sub event. Use it to clear local cache when deploy >= 2 server. Demo how to use RabitMQ
   - For Token, save it on database to verify token again. Don't include sensitive on jwt. Only include noiseTokenId. Read at: https://auth0.com/docs/secure/tokens/token-best-practices
   - Security: injection, XSS. Using library of owasp.       - Create Custom XSSFilter. How to list all default filter
-
-
 
 - Monitor service after deploy
     - Stress test service

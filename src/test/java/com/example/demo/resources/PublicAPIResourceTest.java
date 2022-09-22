@@ -36,7 +36,20 @@ class PublicAPIResourceTest extends AbstractIntegrationTest {
     }
 
     @Test
-    void testPublicAPI() {
+    void testPublicAPI() throws JsonProcessingException {
+        // given, when
+        ResponseEntity<String> response = restTemplate.exchange("/api/public",
+                HttpMethod.GET,
+                new HttpEntity<>(new HttpHeaders()),
+                String.class);
+        // then
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+
+        String expectedMsg = "This is public api. Allow all user without authentication";
+        String json = response.getBody();
+        JsonNode root = JsonHelper.parse(json);
+        String actualMsg = root.get("data").get("message").asText();
+        assertThat(actualMsg).isEqualTo(expectedMsg);
     }
 
 
