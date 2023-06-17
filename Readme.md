@@ -49,7 +49,7 @@ This is a demo for using Spring boot. Along with other backend technique that ca
         - Spring security tutorial: https://www.toptal.com/spring/spring-security-tutorial
         - https://stackoverflow.com/questions/9787409/what-is-the-default-authenticationmanager-in-spring-security-how-does-it-authen
 
-- [Done] Demo v4
+- **[Done]** Demo v4
   - [Done] Change log format: show line number for easy debugging
   - [Done] Custom application.properties, spring boot profiles (dev/production). Config Bean only run at dev/test profile.
   - [Done] Add TestContainers. Using docker to start real database for testing, not using H2/in-memory db. Using SingleContainer pattern to avoid start container many times. Use TestRestTemplate class to create HTTP request.
@@ -62,13 +62,10 @@ This is a demo for using Spring boot. Along with other backend technique that ca
     - T - Timely
     - Ref: https://engineering.zalando.com/posts/2021/02/integration-tests-with-testcontainers.html 
 
-- Deployment
-    - Environment variable to seperate dev/deploy mode
-    - Deploy GCP, config to deploy production, config SSL
-    - Create Docker image for this app. Deploy using Kubernetes
-    - Apply CI/CD
+- **[Done]** Demo v5: Apply Flyway 
+  - Flyway is data migration tool. https://documentation.red-gate.com/fd/why-database-migrations-184127574.html
   
-- Demo v5
+- Demo v
   - SpringBoot exception handler for violation constrains (input data). Custom message for each controller.  
   - CreateUser: check duplicate email
   - Adding LRU cache, use MemCached (how to monitor)
@@ -91,6 +88,12 @@ This is a demo for using Spring boot. Along with other backend technique that ca
     - Config log for showing line number 
     - Encode id, don't use database's id explicitly. Ex: don't use categoryId, use encode(categoryId)
 
+- Deployment
+    - Environment variable to seperate dev/deploy mode
+    - Deploy GCP, config to deploy production, config SSL
+    - Create Docker image for this app. Deploy using Kubernetes
+    - Apply CI/CD
+  
 - *[Option]* Elasticsearch. Center log for aggregation and build QoS (Quality of Serivce)
 - *[Option]* Login with facebook, google
 - Techical debt
