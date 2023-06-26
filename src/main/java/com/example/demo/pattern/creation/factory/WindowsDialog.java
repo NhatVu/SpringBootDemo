@@ -1,6 +1,4 @@
-package com.example.demo.pattern.entity;
-
-import com.example.demo.pattern.creation.DialogFactoryPattern;
+package com.example.demo.pattern.creation.factory;
 
 public class WindowsDialog extends DialogFactoryPattern {
     @Override

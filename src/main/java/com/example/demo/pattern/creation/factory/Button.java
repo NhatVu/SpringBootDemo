@@ -1,4 +1,4 @@
-package com.example.demo.pattern.entity;
+package com.example.demo.pattern.creation.factory;
 
 /*
 Common inteface for all buttons

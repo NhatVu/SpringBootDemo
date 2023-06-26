@@ -1,9 +1,4 @@
-package com.example.demo.pattern.creation;
-
-import com.example.demo.pattern.entity.Button;
-import com.example.demo.pattern.entity.HtmlButton;
-import com.example.demo.pattern.entity.WindowsButton;
-import org.apache.commons.lang3.StringUtils;
+package com.example.demo.pattern.creation.factory;
 
 /*
 Common inteface for all buttons

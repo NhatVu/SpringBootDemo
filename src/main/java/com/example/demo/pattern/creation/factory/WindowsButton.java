@@ -1,4 +1,4 @@
-package com.example.demo.pattern.entity;
+package com.example.demo.pattern.creation.factory;
 
 public class WindowsButton implements Button{
     @Override
