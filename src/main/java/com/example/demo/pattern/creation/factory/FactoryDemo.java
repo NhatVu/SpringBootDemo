@@ -6,7 +6,7 @@ Ref: https://refactoring.guru/design-patterns/factory-method
 Factory Method is a creational design pattern that provides an interface for creating objects in a superclass,
 but allows subclasses to alter the type of objects that will be created.
  */
-public class Factory {
+public class FactoryDemo {
     private static DialogFactoryPattern dialogFactoryPattern;
 
     public static void main(String[] args) {

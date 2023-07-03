@@ -8,9 +8,7 @@ https://refactoring.guru/design-patterns/abstract-factory
  */
 public class AbstractFactoryDemo {
     /**
-     * Application picks the factory type and creates it in run time (usually at
-     * initialization stage), depending on the configuration or environment
-     * variables.
+     Abstract Factory is a creational design pattern that lets you produce families of related objects without specifying their concrete classes.
      */
     private static Application configureApplication() {
         Application app;
