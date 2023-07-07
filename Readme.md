@@ -64,6 +64,8 @@ This is a demo for using Spring boot. Along with other backend technique that ca
 
 - **[Done]** Demo v5: Apply Flyway 
   - Flyway is data migration tool. https://documentation.red-gate.com/fd/why-database-migrations-184127574.html
+  - Disable Spring security for easy testing 
+  - Add read config through @Value and @ConfigurationProperties
   
 - Demo v
   - SpringBoot exception handler for violation constrains (input data). Custom message for each controller.  
