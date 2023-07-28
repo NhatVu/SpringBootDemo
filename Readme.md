@@ -67,6 +67,19 @@ This is a demo for using Spring boot. Along with other backend technique that ca
   - Disable Spring security for easy testing 
   - Add read config through @Value and @ConfigurationProperties
   
+- **[Done]** Learning Design pattern 
+  - Creational Patterns
+    - 3 stars: Factory Method, Abstract method, Builder
+    - 2 stars: Prototype, Singleton
+  - Structural Patterns
+    - 3 stars: Adapter
+    - 2 stars: Composite, Decorator, Facade
+    - 1 star: Bridge, Flyweight, Proxy
+  - Behavioral patterns
+    - 3 stars: Command, Iterator, Observer, Strategy
+    - 2 stars: Chain of Responsibility, Mediator, State, Template Method
+    - 1 star: Memento, Visitor
+    
 - Demo v
   - SpringBoot exception handler for violation constrains (input data). Custom message for each controller.  
   - CreateUser: check duplicate email
